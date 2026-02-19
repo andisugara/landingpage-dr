@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klinik Dokter Gigi Intan - Cimahi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; }
+        .text-primary { color: #c81c80; }
+        .bg-primary { background-color: #c81c80; }
+        .bg-secondary { background-color: #e280b3; }
+        .hover-primary:hover { color: #c81c80; }
+        
+        /* Parallax Style */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .dropdown:hover .dropdown-menu { display: block; }
+
+        /* Animation */
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Gallery Hover */
+        .gallery-item img { transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                   <img src="./images/logo.png" alt="Logo" class="h-12">
+                </a>
+                
+                <div class="hidden md:flex space-x-8 items-center font-medium">
+                    <a href="index.html" class="hover-primary transition">Beranda</a>
+                    <div class="relative dropdown">
+                        <button class="hover-primary transition flex items-center">
+                            Layanan <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-xl py-4 w-56 mt-0 border border-gray-50">
+                            <a href="layanan.html" class="block px-6 py-2 hover:bg-gray-50 hover:text-primary">Semua Layanan</a>
+                            <hr class="my-2 border-gray-100">
+                            <a href="layanan/behel.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Behel Gigi</a>
+                            <a href="layanan/scaling.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Scaling Gigi</a>
+                            <a href="layanan/tambal.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Tambal Gigi</a>
+                            <a href="layanan/veneer.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Veneer Gigi</a>
+                            <a href="layanan/cabut.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Cabut Gigi</a>
+                            <a href="layanan/gigi-palsu.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Gigi Palsu</a>
+                            <a href="layanan/implan.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Implan Gigi</a>
+                            <a href="layanan/psa.html" class="block px-6 py-2 hover:bg-gray-50 text-sm">Perawatan Saluran Akar</a>
+                        </div>
+                    </div>
+                    <a href="promo.html" class="hover-primary transition">Promo</a>
+                    <a href="https://wa.me/6281234567890" target="_blank" class="bg-primary text-white px-6 py-2.5 rounded-full hover:opacity-90 transition shadow-md">Reservasi</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 focus:outline-none" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4 space-y-4 shadow-xl">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block font-medium py-2">Beranda</a>
+            <a href="layanan.html" onclick="toggleMobileMenu()" class="block font-medium py-2">Layanan</a>
+            <a href="promo.html" onclick="toggleMobileMenu()" class="block font-medium py-2">Promo</a>
+            <a href="https://wa.me/6281234567890" class="block bg-primary text-white text-center py-3 rounded-xl font-bold">Reservasi</a>
+        </div>
+    </nav>
+
+    <!-- 1. BERANDA (HOME) SECTION -->
+    <main class="fade-in pt-20">
+        <!-- Minimalist Hero Parallax -->
+        <section class="relative h-[90vh] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=2000&q=80');">
+                <div class="absolute inset-0 bg-white/40"></div>
+            </div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-2xl">
+                    <h2 class="text-primary font-bold tracking-widest mb-2 uppercase text-sm">Klinik Gigi Terpercaya di Cimahi</h2>
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Wujudkan Senyum Impian Anda Bersama Kami.
+                    </h1>
+                    <p class="text-gray-700 text-lg md:text-xl mb-10 leading-relaxed italic border-l-4 border-primary pl-4">
+                        "Jangan biarkan rasa malu menyembunyikan senyummu, karena dunia berhak melihat kebahagiaanmu."
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/6281234567890" class="bg-primary text-white text-center px-10 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition-transform">
+                            Reservasi Sekarang
+                        </a>
+                        <a href="layanan.html" class="bg-white text-gray-800 text-center px-10 py-4 rounded-full font-bold shadow-md hover:bg-gray-50 transition border border-gray-100">
+                            Lihat Layanan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Introduction -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <img src="./images/logo.png" alt="drg Intan" class="rounded-[2rem] ">
+                    </div>
+                    <div>
+                        <h4 class="text-primary font-bold uppercase tracking-widest mb-4">Profil Klinik</h4>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pengalaman Lebih dari 10 Tahun Merawat Senyum Pasien</h2>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                            Sedang mencari klinik gigi di Cimahi yang terjangkau dan terpercaya? <strong>Klinik Dokter Gigi Intan</strong> hadir sebagai solusi untuk memudahkan kamu mendapatkan perawatan gigi terbaik.
+                        </p>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                            Seluruh perawatan ditangani langsung oleh Dokter Gigi Intan yang telah berpengalaman menangani ribuan kasus. Kami mengedepankan pendekatan yang ramah, sabar, dan sangat detail dalam setiap tindakan.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="border-t-2 border-primary pt-4">
+                                <span class="block text-3xl font-bold">1k+</span>
+                                <span class="text-sm text-gray-500 uppercase font-semibold">Pasien Behel</span>
+                            </div>
+                            <div class="border-t-2 border-primary pt-4">
+                                <span class="block text-3xl font-bold">10th+</span>
+                                <span class="text-sm text-gray-500 uppercase font-semibold">Pengalaman Medis</span>
+                            </div>
+                            <div class="border-t-2 border-primary pt-4">
+                                <span class="block text-3xl font-bold">3k+</span>
+                                <span class="text-sm text-gray-500 uppercase font-semibold">Pasien Scaling</span>
+                            </div>
+                            <div class="border-t-2 border-primary pt-4">
+                                <span class="block text-3xl font-bold">800+</span>
+                                <span class="text-sm text-gray-500 uppercase font-semibold">Kasus Estetik</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h4 class="text-primary font-bold uppercase tracking-widest mb-4">Mengapa Pilih Kami</h4>
+                    <h2 class="text-3xl md:text-4xl font-bold">Fokus pada Kenyamanan & Hasil Jangka Panjang</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-3xl shadow-sm">
+                        <i class="fas fa-check-circle text-primary text-3xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Rencana Perawatan Jelas</h3>
+                        <p class="text-gray-600">Setiap pasien mendapatkan rencana perawatan yang transparan, lengkap dengan estimasi waktu dan biaya.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm">
+                        <i class="fas fa-syringe text-primary text-3xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Prosedur Minim Nyeri</h3>
+                        <p class="text-gray-600">Teknik terkini dan alat modern untuk memastikan tindakan nyaman dan aman.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm">
+                        <i class="fas fa-star text-primary text-3xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Hasil Estetik Natural</h3>
+                        <p class="text-gray-600">Kami fokus pada hasil yang rapi, proporsional, dan sesuai karakter senyum Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parallax Quote Section -->
+        <section class="h-80 flex items-center justify-center parallax-bg relative" style="background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=500&q=80');">
+            <div class="absolute inset-0 bg-primary/40 backdrop-blur-[2px]"></div>
+            <div class="relative z-10 text-center text-white px-6">
+                <h2 class="text-2xl md:text-4xl font-bold italic tracking-wide">"Kesehatan Gigi Anda Adalah Investasi Masa Depan."</h2>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <h4 class="text-primary font-bold uppercase tracking-widest mb-4">Galeri Kami</h4>
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Suasana Klinik yang Nyaman</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Klinik">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Peralatan">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Perawatan">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1445527815219-ecbfec67492e?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Lobi">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Ruang Tindakan">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Konsultasi">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Sterilisasi">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-2xl h-64 shadow-md bg-white p-2">
+                        <img src="https://images.unsplash.com/photo-1504814532849-92751923fbdc?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover rounded-xl" alt="Ruang Tunggu">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promo Highlight -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <h4 class="text-primary font-bold uppercase tracking-widest mb-4">Promo Terbaru</h4>
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Penawaran Spesial untuk Pasien Baru</h2>
+                <div class="grid md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 relative overflow-hidden group">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-primary rounded-full flex items-center justify-center pt-8 pr-8 text-white font-bold rotate-12 group-hover:scale-110 transition">-20%</div>
+                        <h3 class="text-2xl font-bold mb-4">Promo Scaling</h3>
+                        <p class="text-gray-500 mb-8">Scaling + Polishing + Edukasi perawatan rumah.</p>
+                        <a href="promo.html" class="inline-flex items-center font-bold text-primary">Lihat Detail <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                    <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 relative overflow-hidden group">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-secondary rounded-full flex items-center justify-center pt-8 pr-8 text-white font-bold rotate-12 group-hover:scale-110 transition">FREE</div>
+                        <h3 class="text-2xl font-bold mb-4">Konsultasi Behel</h3>
+                        <p class="text-gray-500 mb-8">Gratis konsultasi dan simulasi rencana perawatan behel.</p>
+                        <a href="promo.html" class="inline-flex items-center font-bold text-primary">Lihat Detail <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                    <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 relative overflow-hidden group">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-primary rounded-full flex items-center justify-center pt-8 pr-8 text-white font-bold rotate-12 group-hover:scale-110 transition">BEST</div>
+                        <h3 class="text-2xl font-bold mb-4">Veneer Estetik</h3>
+                        <p class="text-gray-500 mb-8">Paket veneer komposit untuk senyum lebih cerah dan rapi.</p>
+                        <a href="promo.html" class="inline-flex items-center font-bold text-primary">Lihat Detail <i class="fas fa-arrow-right ml-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- List Layanan -->
+        <section class="py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <h4 class="text-primary font-bold uppercase tracking-widest mb-4">Layanan Kami</h4>
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Pilihan Perawatan Lengkap</h2>
+                <div class="grid md:grid-cols-4 gap-6 text-left">
+                    <a href="layanan/behel.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Behel Gigi</h3>
+                        <p class="text-gray-600 text-sm">Rapi & estetik dengan kontrol rutin.</p>
+                    </a>
+                    <a href="layanan/scaling.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Scaling Gigi</h3>
+                        <p class="text-gray-600 text-sm">Bersihkan karang gigi & plak.</p>
+                    </a>
+                    <a href="layanan/tambal.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Tambal Gigi</h3>
+                        <p class="text-gray-600 text-sm">Tambalan estetik dan kuat.</p>
+                    </a>
+                    <a href="layanan/veneer.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Veneer Gigi</h3>
+                        <p class="text-gray-600 text-sm">Perbaiki warna & bentuk gigi.</p>
+                    </a>
+                    <a href="layanan/cabut.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Cabut Gigi</h3>
+                        <p class="text-gray-600 text-sm">Minim nyeri & aman.</p>
+                    </a>
+                    <a href="layanan/gigi-palsu.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Gigi Palsu</h3>
+                        <p class="text-gray-600 text-sm">Kenyamanan dan fungsi kunyah.</p>
+                    </a>
+                    <a href="layanan/implan.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Implan Gigi</h3>
+                        <p class="text-gray-600 text-sm">Solusi jangka panjang.</p>
+                    </a>
+                    <a href="layanan/psa.html" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <h3 class="font-bold mb-2">Perawatan Saluran Akar</h3>
+                        <p class="text-gray-600 text-sm">Atasi infeksi saraf gigi.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h4 class="text-primary font-bold mb-4 uppercase tracking-widest">Apa Kata Mereka</h4>
+                <h2 class="text-3xl font-bold mb-12">Cerita Pasien Klinik drg. Intan</h2>
+                <div class="p-10 bg-gray-50 rounded-[3rem] shadow-sm relative italic">
+                    <i class="fas fa-quote-left text-primary/20 text-6xl absolute top-6 left-6"></i>
+                    <p class="text-lg text-gray-600 mb-6 relative z-10">
+                        "Dokter Intan sangat sabar menjelaskan kondisi gigi saya. Pemasangan behelnya rapi dan harganya sangat transparan dibandingkan klinik lain di Cimahi. Sangat puas!"
+                    </p>
+                    <h5 class="font-bold text-gray-900">— Sarah, Pasien Behel</h5>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-24 bg-gray-50">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h4 class="text-primary font-bold uppercase tracking-widest mb-4">FAQ</h4>
+                    <h2 class="text-3xl font-bold">Pertanyaan yang Sering Ditanyakan</h2>
+                </div>
+                <div class="space-y-4">
+                    <details class="bg-white p-6 rounded-2xl shadow-sm">
+                        <summary class="font-bold cursor-pointer">Apakah harus buat janji dulu?</summary>
+                        <p class="text-gray-600 mt-3">Disarankan membuat janji agar waktu konsultasi lebih nyaman dan tidak menunggu lama.</p>
+                    </details>
+                    <details class="bg-white p-6 rounded-2xl shadow-sm">
+                        <summary class="font-bold cursor-pointer">Berapa lama proses behel gigi?</summary>
+                        <p class="text-gray-600 mt-3">Rata-rata 12–24 bulan tergantung tingkat kerapihan gigi dan kepatuhan kontrol.</p>
+                    </details>
+                    <details class="bg-white p-6 rounded-2xl shadow-sm">
+                        <summary class="font-bold cursor-pointer">Apakah scaling membuat gigi ngilu?</summary>
+                        <p class="text-gray-600 mt-3">Rasa ngilu ringan bisa terjadi namun akan hilang dalam 1–2 hari dengan perawatan yang tepat.</p>
+                    </details>
+                    <details class="bg-white p-6 rounded-2xl shadow-sm">
+                        <summary class="font-bold cursor-pointer">Metode pembayaran apa saja yang tersedia?</summary>
+                        <p class="text-gray-600 mt-3">Kami menerima tunai, transfer bank, dan beberapa dompet digital.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Footer / Location -->
+    <footer class="bg-gray-900 text-white pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 mb-16">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-primary">Lokasi Klinik</h2>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Komplek Pemda, Jl. Sangkuriang Mukti No.102 Blok Y, Padasuka, Kec. Cimahi Tengah, Kota Cimahi, Jawa Barat 40526
+                    </p>
+                    <div class="space-y-4">
+                        <p class="flex items-center"><i class="fas fa-phone-alt mr-3 text-primary"></i> 0812-3456-7890</p>
+                        <p class="flex items-center"><i class="fas fa-clock mr-3 text-primary"></i> 10.00 - 20.00 (Senin - Sabtu)</p>
+                    </div>
+                    <a href="https://maps.app.goo.gl/examplelink" target="_blank" class="inline-flex items-center bg-white text-gray-900 px-8 py-3 rounded-full font-bold mt-8 hover:bg-primary hover:text-white transition">
+                        Petunjuk Jalan (Maps) <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="rounded-[2rem] overflow-hidden border-4 border-gray-800 h-80 shadow-2xl">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.1!2d107.54!3d-6.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTInMTIuMCJTIDEwN8KwMzInMjQuMCJF!5e0!3m2!1sen!2sid!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="text-center pt-12 border-t border-gray-800 text-gray-500 text-sm italic">
+                &copy; 2024 Klinik Dokter Gigi Intan Cimahi. Kesehatan Anda, Prioritas Kami.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+    </script>
+</body>
+</html>
