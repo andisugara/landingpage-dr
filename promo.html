@@ -73,50 +73,8 @@
                 <h1 class="text-4xl font-bold mb-4 text-primary">Katalog Promo Pasien</h1>
                 <p class="text-gray-500 mb-16">Berlaku khusus untuk pendaftaran melalui WhatsApp.</p>
                 
-                <div class="grid md:grid-cols-3 gap-8 text-left">
-                    <!-- Promo 1 -->
-                    <div class="bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100 relative group">
-                        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=80" alt="Promo Scaling" class="h-44 w-full object-cover">
-                        <div class="p-8">
-                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-primary rounded-full flex items-center justify-center pt-8 pr-8 text-white font-bold rotate-12 group-hover:scale-110 transition">-20%</div>
-                        <h3 class="text-2xl font-bold mb-4">New Year Scaling</h3>
-                        <p class="text-gray-500 mb-10">Pembersihan karang gigi lengkap + Polishing + Cek Intraoral.</p>
-                        <div class="mt-auto">
-                            <div class="text-gray-400 line-through text-sm">Rp 450.000</div>
-                            <div class="text-3xl font-bold text-primary mb-6">Rp 199.000</div>
-                            <a href="https://wa.me/6282228986161?text=Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20ambil%20Promo%20Scaling" class="block text-center bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-primary transition shadow-md">Klaim Promo via WA</a>
-                        </div>
-                        </div>
-                    </div>
-
-                    <!-- Promo 2 -->
-                    <div class="bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100 relative group">
-                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80" alt="Promo Behel" class="h-44 w-full object-cover">
-                        <div class="p-8">
-                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-secondary rounded-full flex items-center justify-center pt-8 pr-8 text-white font-bold rotate-12 group-hover:scale-110 transition">FREE</div>
-                        <h3 class="text-2xl font-bold mb-4">Konsultasi Behel</h3>
-                        <p class="text-gray-500 mb-10">Gratis Konsultasi Detail & Rencana Perawatan Behel untuk 10 pendaftar pertama.</p>
-                        <div class="mt-auto">
-                            <div class="text-gray-400 line-through text-sm">Rp 100.000</div>
-                            <div class="text-3xl font-bold text-primary mb-6">Gratis!</div>
-                            <a href="https://wa.me/6282228986161?text=Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Konsultasi%20Behel%20Gratis" class="block text-center bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-primary transition shadow-md">Ambil Sekarang via WA</a>
-                        </div>
-                        </div>
-                    </div>
-
-                    <!-- Promo 3 -->
-                    <div class="bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100 relative group">
-                        <img src="https://images.unsplash.com/photo-1559839734-2b71f1e3c770?auto=format&fit=crop&w=900&q=80" alt="Promo Veneer" class="h-44 w-full object-cover">
-                        <div class="p-8">
-                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-primary rounded-full flex items-center justify-center pt-8 pr-8 text-white font-bold rotate-12 group-hover:scale-110 transition">BEST</div>
-                        <h3 class="text-2xl font-bold mb-4">Veneer Estetik</h3>
-                        <p class="text-gray-500 mb-10">Paket 4-6 Gigi Veneer Composite dengan harga spesial per gigi.</p>
-                        <div class="mt-auto">
-                            <div class="text-3xl font-bold text-primary mb-6">Tanya Harga</div>
-                            <a href="https://wa.me/6282228986161?text=Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Tanya%20Promo%20Veneer" class="block text-center bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-primary transition shadow-md">Hubungi Admin via WA</a>
-                        </div>
-                        </div>
-                    </div>
+                <div id="promoContainer" class="grid md:grid-cols-3 gap-8 text-left">
+                    <!-- Promo cards dimuat dari JSON -->
                 </div>
             </div>
         </section>
@@ -153,6 +111,120 @@
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
+
+        // Data default promo (embedded)
+        const defaultPromoData = [
+            {
+                "id": 1,
+                "title": "New Year Scaling",
+                "description": "Pembersihan karang gigi lengkap + Polishing + Cek Intraoral.",
+                "image": "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=80",
+                "badge": "-20%",
+                "badgeColor": "bg-primary",
+                "originalPrice": "Rp 450.000",
+                "finalPrice": "Rp 199.000",
+                "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20ambil%20Promo%20Scaling",
+                "waButtonText": "Klaim Promo via WA"
+            },
+            {
+                "id": 2,
+                "title": "Konsultasi Behel",
+                "description": "Gratis Konsultasi Detail & Rencana Perawatan Behel untuk 10 pendaftar pertama.",
+                "image": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
+                "badge": "FREE",
+                "badgeColor": "bg-secondary",
+                "originalPrice": "Rp 100.000",
+                "finalPrice": "Gratis!",
+                "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Konsultasi%20Behel%20Gratis",
+                "waButtonText": "Ambil Sekarang via WA"
+            },
+            {
+                "id": 3,
+                "title": "Veneer Estetik",
+                "description": "Paket 4-6 Gigi Veneer Composite dengan harga spesial per gigi.",
+                "image": "https://images.unsplash.com/photo-1559839734-2b71f1e3c770?auto=format&fit=crop&w=900&q=80",
+                "badge": "BEST",
+                "badgeColor": "bg-primary",
+                "originalPrice": "",
+                "finalPrice": "Tanya Harga",
+                "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Tanya%20Promo%20Veneer",
+                "waButtonText": "Hubungi Admin via WA"
+            }
+        ];
+
+        // Load promo data dari localStorage atau gunakan default
+        async function loadPromoData() {
+            try {
+                // Cek localStorage dulu (jika ada perubahan dari admin)
+                const savedData = localStorage.getItem('promoData');
+                let promoData;
+
+                if (savedData) {
+                    promoData = JSON.parse(savedData).promos;
+                } else {
+                    // Gunakan data default yang sudah embedded
+                    promoData = defaultPromoData;
+                }
+
+                renderPromos(promoData);
+            } catch (error) {
+                console.error('Error loading promo data:', error);
+                // Jika error, tetap gunakan data default
+                renderPromos(defaultPromoData);
+            }
+        }
+
+        // Render promo cards
+        function renderPromos(promos) {
+            const container = document.getElementById('promoContainer');
+            container.innerHTML = '';
+
+            // Jika tidak ada promo
+            if (!promos || promos.length === 0) {
+                container.innerHTML = `
+                    <div class="md:col-span-3">
+                        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-12 text-center">
+                            <div class="text-6xl mb-4">
+                                <i class="fas fa-calendar-alt text-yellow-500"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Belum Ada Promo</h3>
+                            <p class="text-gray-600 mb-6">Saat ini belum ada promo tersedia. Silakan kembali lagi nanti atau hubungi kami melalui WhatsApp untuk penawaran terbaru.</p>
+                            <a href="https://wa.me/6282228986161" class="inline-flex items-center bg-primary text-white px-8 py-3 rounded-full font-bold hover:opacity-90 transition">
+                                <i class="fas fa-whatsapp mr-2"></i>
+                                Chat via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            promos.forEach((promo) => {
+                const originalPriceHTML = promo.originalPrice 
+                    ? `<div class="text-gray-400 line-through text-sm">${promo.originalPrice}</div>` 
+                    : '';
+
+                const card = document.createElement('div');
+                card.className = 'bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100 relative group';
+                card.innerHTML = `
+                    <img src="${promo.image}" alt="${promo.title}" class="h-44 w-full object-cover">
+                    <div class="p-8">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 ${promo.badgeColor} rounded-full flex items-center justify-center pt-8 pr-8 text-white font-bold rotate-12 group-hover:scale-110 transition">${promo.badge}</div>
+                        <h3 class="text-2xl font-bold mb-4">${promo.title}</h3>
+                        <p class="text-gray-500 mb-10">${promo.description}</p>
+                        <div class="mt-auto">
+                            ${originalPriceHTML}
+                            <div class="text-3xl font-bold text-primary mb-6">${promo.finalPrice}</div>
+                            <a href="https://wa.me/6282228986161?text=${promo.waMessage}" class="block text-center bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-primary transition shadow-md">${promo.waButtonText}</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Load data saat halaman dimuat
+        window.addEventListener('load', loadPromoData);
     </script>
 </body>
 </html>

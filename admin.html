@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Klinik Dokter Gigi Intan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f9fafb; }
+        .text-primary { color: #c81c80; }
+        .bg-primary { background-color: #c81c80; }
+        .bg-secondary { background-color: #e280b3; }
+        .nav-item { transition: all 0.3s ease; }
+        .nav-item.active { background-color: #c81c80; color: white; }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md border-b-4 border-primary">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                    <i class="fas fa-tooth text-white"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-primary">Admin Panel</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-600">
+                    <i class="fas fa-user-circle text-primary mr-2"></i>
+                    <span id="adminUsername"></span>
+                </span>
+                <button onclick="logout()" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition font-bold">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <!-- Header -->
+        <div class="mb-12 flex justify-between items-center">
+            <div>
+                <h2 class="text-4xl font-bold text-gray-900 mb-2">Kelola Promo</h2>
+                <p class="text-gray-600">Edit konten, gambar, dan link WhatsApp untuk setiap promo</p>
+            </div>
+            <button onclick="addNewPromo()" class="bg-green-500 text-white px-6 py-3 rounded-xl hover:bg-green-600 transition font-bold flex items-center space-x-2 shadow-lg">
+                <i class="fas fa-plus"></i>
+                <span>Tambah Promo Baru</span>
+            </button>
+        </div>
+
+        <!-- Promo List -->
+        <div id="promoContainer" class="grid gap-8 mb-12">
+            <!-- Promo cards akan dimuat di sini -->
+        </div>
+
+        <!-- Save Button -->
+        <div class="fixed bottom-8 right-8 flex flex-col gap-3">
+            <button onclick="saveAllPromos()" class="bg-primary text-white px-8 py-4 rounded-full shadow-2xl hover:opacity-90 transition font-bold flex items-center space-x-2">
+                <i class="fas fa-save"></i>
+                <span>Simpan Semua Perubahan</span>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        let promoData = [];
+
+        // Data default promo
+        const defaultPromoData = [
+            {
+                "id": 1,
+                "title": "New Year Scaling",
+                "description": "Pembersihan karang gigi lengkap + Polishing + Cek Intraoral.",
+                "image": "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=80",
+                "badge": "-20%",
+                "badgeColor": "bg-primary",
+                "originalPrice": "Rp 450.000",
+                "finalPrice": "Rp 199.000",
+                "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20ambil%20Promo%20Scaling",
+                "waButtonText": "Klaim Promo via WA"
+            },
+            {
+                "id": 2,
+                "title": "Konsultasi Behel",
+                "description": "Gratis Konsultasi Detail & Rencana Perawatan Behel untuk 10 pendaftar pertama.",
+                "image": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
+                "badge": "FREE",
+                "badgeColor": "bg-secondary",
+                "originalPrice": "Rp 100.000",
+                "finalPrice": "Gratis!",
+                "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Konsultasi%20Behel%20Gratis",
+                "waButtonText": "Ambil Sekarang via WA"
+            },
+            {
+                "id": 3,
+                "title": "Veneer Estetik",
+                "description": "Paket 4-6 Gigi Veneer Composite dengan harga spesial per gigi.",
+                "image": "https://images.unsplash.com/photo-1559839734-2b71f1e3c770?auto=format&fit=crop&w=900&q=80",
+                "badge": "BEST",
+                "badgeColor": "bg-primary",
+                "originalPrice": "",
+                "finalPrice": "Tanya Harga",
+                "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Tanya%20Promo%20Veneer",
+                "waButtonText": "Hubungi Admin via WA"
+            }
+        ];
+
+        // Cek authentikasi
+        function checkAuth() {
+            if (localStorage.getItem('adminSession') !== 'true') {
+                window.location.href = 'admin-login.html';
+            }
+            document.getElementById('adminUsername').textContent = localStorage.getItem('adminUser') || 'Admin';
+        }
+
+        // Load data dari localStorage atau default
+        async function loadPromoData() {
+            try {
+                // Cek dulu apakah ada data yang sudah disimpan
+                const savedData = localStorage.getItem('promoData');
+                
+                if (savedData) {
+                    // Jika ada data tersimpan, gunakan itu
+                    promoData = JSON.parse(savedData).promos;
+                } else {
+                    // Jika tidak ada, gunakan data default
+                    promoData = defaultPromoData;
+                }
+                
+                renderPromos();
+            } catch (error) {
+                console.error('Error loading promo data:', error);
+                // Jika error, tetap gunakan data default
+                promoData = defaultPromoData;
+                renderPromos();
+            }
+        }
+
+        // Render promo cards
+        function renderPromos() {
+            const container = document.getElementById('promoContainer');
+            container.innerHTML = '';
+
+            if (promoData.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-12 text-center">
+                        <div class="text-6xl mb-4">
+                            <i class="fas fa-box-open text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Belum Ada Promo</h3>
+                        <p class="text-gray-600 mb-6">Klik tombol "Tambah Promo Baru" untuk membuat promo pertama Anda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            promoData.forEach((promo, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100 hover:shadow-xl transition relative';
+                card.innerHTML = `
+                    <!-- Tombol Hapus -->
+                    <button onclick="deletePromo(${index})" class="absolute top-4 right-4 bg-red-500 text-white w-10 h-10 rounded-full hover:bg-red-600 transition shadow-md flex items-center justify-center" title="Hapus Promo">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Image Preview -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-3">Gambar Promo</label>
+                            <img id="preview-${index}" src="${promo.image}" class="w-full h-48 object-cover rounded-xl shadow-md mb-4" alt="Preview">
+                            <input type="text" class="w-full px-3 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary transition" 
+                                   value="${promo.image}" 
+                                   onchange="updatePromo(${index}, 'image', this.value); updatePreview(${index})"
+                                   placeholder="URL gambar">
+                        </div>
+
+                        <!-- Content -->
+                        <div class="md:col-span-2 space-y-4">
+                            <!-- Title -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Judul Promo</label>
+                                <input type="text" class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition" 
+                                       value="${promo.title}" 
+                                       onchange="updatePromo(${index}, 'title', this.value)"
+                                       placeholder="Judul promo">
+                            </div>
+
+                            <!-- Description -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Deskripsi</label>
+                                <textarea class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition" 
+                                          rows="2" 
+                                          onchange="updatePromo(${index}, 'description', this.value)"
+                                          placeholder="Deskripsi promo">${promo.description}</textarea>
+                            </div>
+
+                            <!-- Badge -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Badge/Label</label>
+                                    <input type="text" class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition" 
+                                           value="${promo.badge}" 
+                                           onchange="updatePromo(${index}, 'badge', this.value)"
+                                           placeholder="Contoh: -20%, FREE, BEST">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Warna Badge</label>
+                                    <select class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition" 
+                                            onchange="updatePromo(${index}, 'badgeColor', this.value)">
+                                        <option value="bg-primary" ${promo.badgeColor === 'bg-primary' ? 'selected' : ''}>Pink (Primary)</option>
+                                        <option value="bg-secondary" ${promo.badgeColor === 'bg-secondary' ? 'selected' : ''}>Pink Muda (Secondary)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Prices -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Harga Sebelum (Coret)</label>
+                                    <input type="text" class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition" 
+                                           value="${promo.originalPrice}" 
+                                           onchange="updatePromo(${index}, 'originalPrice', this.value)"
+                                           placeholder="Rp 450.000 (kosongkan jika tidak ada)">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Harga Akhir/Promo</label>
+                                    <input type="text" class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition" 
+                                           value="${promo.finalPrice}" 
+                                           onchange="updatePromo(${index}, 'finalPrice', this.value)"
+                                           placeholder="Rp 199.000 atau Gratis!">
+                                </div>
+                            </div>
+
+                            <!-- WhatsApp -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Pesan WhatsApp (URL Encoded)</label>
+                                <input type="text" class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition text-xs" 
+                                       value="${promo.waMessage}" 
+                                       onchange="updatePromo(${index}, 'waMessage', this.value)"
+                                       placeholder="Halo%20Dokter...">
+                            </div>
+
+                            <!-- Button Text -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Teks Tombol</label>
+                                <input type="text" class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary transition" 
+                                       value="${promo.waButtonText}" 
+                                       onchange="updatePromo(${index}, 'waButtonText', this.value)"
+                                       placeholder="Klaim Promo via WA">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Update promo data
+        function updatePromo(index, field, value) {
+            promoData[index][field] = value;
+        }
+
+        // Update preview gambar
+        function updatePreview(index) {
+            const preview = document.getElementById(`preview-${index}`);
+            preview.src = promoData[index].image;
+        }
+
+        // Tambah promo baru
+        function addNewPromo() {
+            const newId = promoData.length > 0 ? Math.max(...promoData.map(p => p.id)) + 1 : 1;
+            const newPromo = {
+                id: newId,
+                title: "Promo Baru",
+                description: "Deskripsi promo baru",
+                image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=80",
+                badge: "NEW",
+                badgeColor: "bg-primary",
+                originalPrice: "",
+                finalPrice: "Rp 0",
+                waMessage: "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20info%20promo",
+                waButtonText: "Hubungi via WA"
+            };
+            
+            promoData.push(newPromo);
+            renderPromos();
+            
+            // Scroll ke promo baru
+            setTimeout(() => {
+                const container = document.getElementById('promoContainer');
+                container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            
+            // Notifikasi
+            showNotification('Promo baru ditambahkan! Jangan lupa edit dan simpan.', 'info');
+        }
+
+        // Hapus promo
+        function deletePromo(index) {
+            if (confirm(`Hapus promo "${promoData[index].title}"?\n\nPromo akan dihapus setelah Anda klik "Simpan Semua Perubahan".`)) {
+                promoData.splice(index, 1);
+                renderPromos();
+                showNotification('Promo dihapus! Klik "Simpan" untuk menyimpan perubahan.', 'warning');
+            }
+        }
+
+        // Notifikasi helper
+        function showNotification(message, type = 'success') {
+            const colors = {
+                success: 'bg-green-500',
+                warning: 'bg-yellow-500',
+                info: 'bg-blue-500',
+                error: 'bg-red-500'
+            };
+            
+            const alert = document.createElement('div');
+            alert.className = `fixed top-6 right-6 ${colors[type]} text-white px-8 py-4 rounded-xl shadow-2xl font-bold flex items-center space-x-2 z-50`;
+            alert.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i><span>${message}</span>`;
+            document.body.appendChild(alert);
+            
+            setTimeout(() => alert.remove(), 3000);
+        }
+
+        // Simpan semua perubahan
+        function saveAllPromos() {
+            const dataToSave = { promos: promoData };
+            
+            // Untuk demo, simpan ke localStorage
+            localStorage.setItem('promoData', JSON.stringify(dataToSave));
+            
+            showNotification('Data promo berhasil disimpan!', 'success');
+            
+            console.log('Data disimpan:', dataToSave);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                localStorage.removeItem('adminSession');
+                localStorage.removeItem('adminUser');
+                localStorage.removeItem('adminLoginTime');
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            checkAuth();
+            loadPromoData();
+        });
+    </script>
+</body>
+</html>

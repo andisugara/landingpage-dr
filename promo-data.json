@@ -1,0 +1,40 @@
+{
+  "promos": [
+    {
+      "id": 1,
+      "title": "New Year Scaling",
+      "description": "Pembersihan karang gigi lengkap + Polishing + Cek Intraoral.",
+      "image": "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=80",
+      "badge": "-20%",
+      "badgeColor": "bg-primary",
+      "originalPrice": "Rp 450.000",
+      "finalPrice": "Rp 199.000",
+      "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20ambil%20Promo%20Scaling",
+      "waButtonText": "Klaim Promo via WA"
+    },
+    {
+      "id": 2,
+      "title": "Konsultasi Behel",
+      "description": "Gratis Konsultasi Detail & Rencana Perawatan Behel untuk 10 pendaftar pertama.",
+      "image": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
+      "badge": "FREE",
+      "badgeColor": "bg-secondary",
+      "originalPrice": "Rp 100.000",
+      "finalPrice": "Gratis!",
+      "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Konsultasi%20Behel%20Gratis",
+      "waButtonText": "Ambil Sekarang via WA"
+    },
+    {
+      "id": 3,
+      "title": "Veneer Estetik",
+      "description": "Paket 4-6 Gigi Veneer Composite dengan harga spesial per gigi.",
+      "image": "https://images.unsplash.com/photo-1559839734-2b71f1e3c770?auto=format&fit=crop&w=900&q=80",
+      "badge": "BEST",
+      "badgeColor": "bg-primary",
+      "originalPrice": "",
+      "finalPrice": "Tanya Harga",
+      "waMessage": "Halo%20Dokter%20Gigi%20Intan,%20saya%20mau%20Tanya%20Promo%20Veneer",
+      "waButtonText": "Hubungi Admin via WA"
+    }
+  ]
+}
