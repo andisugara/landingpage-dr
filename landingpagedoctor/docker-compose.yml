@@ -20,7 +20,7 @@ services:
     container_name: drintan-nginx
     restart: unless-stopped
     ports:
-      - 8091:80
+      - 8094:80
     volumes:
       - ./:/var/www
       - ./docker/nginx:/etc/nginx/conf.d/
