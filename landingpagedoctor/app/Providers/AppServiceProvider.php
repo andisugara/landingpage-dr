@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\ContentBlock;
 use App\Models\Service;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,5 +44,9 @@ class AppServiceProvider extends ServiceProvider
                 'globalContent' => $blocks,
             ]);
         });
+
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
